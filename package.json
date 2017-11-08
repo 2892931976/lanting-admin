@@ -1,10 +1,9 @@
 {
-  "name": "ant-design-pro",
+  "name": "ant-admin",
   "version": "0.2.2-rc.1",
-  "description": "An out-of-box UI solution for enterprise applications",
+  "description": "基于 Ant Design of React 和 Ant Design Pro 的企业级 Web 后台管理模板，开箱即用的中台前端/设计解决方案。",
   "private": true,
   "scripts": {
-    "precommit": "npm run lint-staged",
     "start": "roadhog server",
     "start:no-proxy": "NO_PROXY=true roadhog server",
     "build": "roadhog build",

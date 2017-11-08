@@ -253,7 +253,7 @@ class BasicLayout extends React.PureComponent {
           <div className={styles.logo}>
             <Link to="/">
               <img src="https://gw.alipayobjects.com/zos/rmsportal/iwWyPinUoseUxIAeElSx.svg" alt="logo" />
-              <h1>Ant Design Pro</h1>
+              <h1>欢迎使用</h1>
             </Link>
           </div>
           <Menu
@@ -344,16 +344,16 @@ class BasicLayout extends React.PureComponent {
             </Switch>
             <GlobalFooter
               links={[{
-                title: 'Pro 首页',
+                title: 'Ant Design',
+                href: 'http://ant.design',
+                blankTarget: true,
+              }, {
+                title: 'Ant Design Pro',
                 href: 'http://pro.ant.design',
                 blankTarget: true,
               }, {
                 title: 'GitHub',
                 href: 'https://github.com/ant-design/ant-design-pro',
-                blankTarget: true,
-              }, {
-                title: 'Ant Design',
-                href: 'http://ant.design',
                 blankTarget: true,
               }]}
               copyright={

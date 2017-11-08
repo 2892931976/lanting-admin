@@ -39,7 +39,7 @@ const data = [{
   name: '首页', // for breadcrumb
   path: '',
   children: [{
-    name: 'Dashboard',
+    name: '仪表盘',
     icon: 'dashboard',
     path: 'dashboard',
     children: [{
@@ -122,32 +122,32 @@ const data = [{
       component: AdvancedProfile,
     }],
   }, {
-    name: '结果',
+    name: '结果页',
     path: 'result',
     icon: 'check-circle-o',
     children: [{
-      name: '成功',
+      name: '成功提示',
       path: 'success',
       component: Success,
     }, {
-      name: '失败',
+      name: '失败提示',
       path: 'fail',
       component: Error,
     }],
   }, {
-    name: '异常',
+    name: '错误页',
     path: 'exception',
     icon: 'warning',
     children: [{
-      name: '403',
+      name: '403 页面',
       path: '403',
       component: Exception403,
     }, {
-      name: '404',
+      name: '404 页面',
       path: '404',
       component: Exception404,
     }, {
-      name: '500',
+      name: '500 页面',
       path: '500',
       component: Exception500,
     }],
@@ -156,15 +156,15 @@ const data = [{
   component: UserLayout,
   layout: 'UserLayout',
   children: [{
-    name: '帐户',
+    name: '用户账户',
     icon: 'user',
     path: 'user',
     children: [{
-      name: '登录',
+      name: '登录页',
       path: 'login',
       component: Login,
     }, {
-      name: '注册',
+      name: '注册页',
       path: 'register',
       component: Register,
     }, {
@@ -177,8 +177,8 @@ const data = [{
   component: BlankLayout,
   layout: 'BlankLayout',
   children: {
-    name: '使用文档',
-    path: 'http://pro.ant.design/docs/getting-started',
+    name: '开始使用',
+    path: 'http://pro.ant.design/docs/getting-started-cn',
     target: '_blank',
     icon: 'book',
   },

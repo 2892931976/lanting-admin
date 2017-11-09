@@ -23,8 +23,8 @@ const proxy = {
       },
     },
     $body: {
-      name: 'momo.zxy',
-      avatar: imgMap.user,
+      name: '安第斯神鹰',
+      avatar: 'https://avatars3.githubusercontent.com/u/15240953?s=460&v=4',
       userid: '00000001',
       notifyCount: 12,
     },

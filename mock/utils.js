@@ -1,5 +1,5 @@
 export const imgMap = {
-  user: 'https://gw.alipayobjects.com/zos/rmsportal/UjusLxePxWGkttaqqmUI.png',
+  user: 'https://gw.alipayobjects.com/zos/rmsportal/IOtlElCiWVIOZqgDslYd.png',
   a: 'https://gw.alipayobjects.com/zos/rmsportal/ZrkcSjizAKNWwJTwcadT.png',
   b: 'https://gw.alipayobjects.com/zos/rmsportal/KYlwHMeomKQbhJDRUVvt.png',
   c: 'https://gw.alipayobjects.com/zos/rmsportal/gabvleTstEvzkbQRfjxu.png',

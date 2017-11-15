@@ -1,11 +1,11 @@
 {
   "name": "ant-design-pro",
-  "version": "0.2.3-rc.0",
+  "version": "0.2.3-rc.1",
   "description": "An out-of-box UI solution for enterprise applications",
   "private": true,
   "scripts": {
     "start": "roadhog server",
-    "start:no-proxy": "NO_PROXY=true roadhog server",
+    "start:no-proxy": "cross-env NO_PROXY=true roadhog server",
     "build": "roadhog build",
     "site": "roadhog-api-doc static && gh-pages -d dist",
     "analyze": "roadhog build --analyze",
@@ -49,6 +49,7 @@
     "babel-plugin-transform-runtime": "^6.9.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "cross-env": "^5.1.1",
     "cross-port-killer": "^1.0.1",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.2",

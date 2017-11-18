@@ -16,7 +16,7 @@ export const getNavData = app => [
     path: '/',
     children: [
       {
-        name: 'Dashboard',
+        name: '仪表盘',
         icon: 'dashboard',
         path: 'dashboard',
         children: [

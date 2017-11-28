@@ -1,7 +1,7 @@
 {
-  "name": "ant-admin",
+  "name": "ant-design-pro",
   "version": "0.3.0",
-  "description": "开箱即用的中台前端/设计解决方案",
+  "description": "An out-of-box UI solution for enterprise applications",
   "private": true,
   "scripts": {
     "start": "roadhog server",

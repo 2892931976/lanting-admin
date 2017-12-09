@@ -23,8 +23,13 @@ const proxy = {
       },
     },
     $body: {
+<<<<<<< HEAD
       name: '安第斯神鹰',
       avatar: 'https://avatars3.githubusercontent.com/u/15240953?s=460&v=4',
+=======
+      name: 'Serati Ma',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/keeYtvRpGFVVKOOiOZDS.png',
+>>>>>>> 5715817cdc40abd880c77b20d47a921829d8dd80
       userid: '00000001',
       notifyCount: 12,
     },

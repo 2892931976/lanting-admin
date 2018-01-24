@@ -8,6 +8,7 @@ export default class TableForm extends PureComponent {
 
     this.state = {
       data: props.value,
+      loading: false,
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -17,8 +18,8 @@ export default class TableForm extends PureComponent {
       });
     }
   }
-  getRowByKey(key) {
-    return this.state.data.filter(item => item.key === key)[0];
+  getRowByKey(key, newData) {
+    return (newData || this.state.data).filter(item => item.key === key)[0];
   }
   index = 0;
   cacheOriginData = {};
@@ -33,16 +34,17 @@ export default class TableForm extends PureComponent {
       }
     });
   }
-  toggleEditable(e, key) {
+  toggleEditable=(e, key) => {
     e.preventDefault();
-    const target = this.getRowByKey(key);
+    const newData = this.state.data.map(item => ({ ...item }));
+    const target = this.getRowByKey(key, newData);
     if (target) {
       // 进入编辑状态时保存原始数据
       if (!target.editable) {
         this.cacheOriginData[key] = { ...target };
       }
       target.editable = !target.editable;
-      this.setState({ data: [...this.state.data] });
+      this.setState({ data: newData });
     }
   }
   remove(key) {
@@ -51,7 +53,7 @@ export default class TableForm extends PureComponent {
     this.props.onChange(newData);
   }
   newMember = () => {
-    const newData = [...this.state.data];
+    const newData = this.state.data.map(item => ({ ...item }));
     newData.push({
       key: `NEW_TEMP_ID_${this.index}`,
       workId: '',
@@ -69,8 +71,8 @@ export default class TableForm extends PureComponent {
     }
   }
   handleFieldChange(e, fieldName, key) {
-    const newData = [...this.state.data];
-    const target = this.getRowByKey(key);
+    const newData = this.state.data.map(item => ({ ...item }));
+    const target = this.getRowByKey(key, newData);
     if (target) {
       target[fieldName] = e.target.value;
       this.setState({ data: newData });
@@ -78,6 +80,9 @@ export default class TableForm extends PureComponent {
   }
   saveRow(e, key) {
     e.persist();
+    this.setState({
+      loading: true,
+    });
     // save field when blur input
     setTimeout(() => {
       if (document.activeElement.tagName === 'INPUT' &&
@@ -97,18 +102,22 @@ export default class TableForm extends PureComponent {
       delete target.isNew;
       this.toggleEditable(e, key);
       this.props.onChange(this.state.data);
-    }, 10);
+      this.setState({
+        loading: false,
+      });
+    }, 500);
   }
   cancel(e, key) {
     this.clickedCancel = true;
     e.preventDefault();
-    const target = this.getRowByKey(key);
+    const newData = this.state.data.map(item => ({ ...item }));
+    const target = this.getRowByKey(key, newData);
     if (this.cacheOriginData[key]) {
       Object.assign(target, this.cacheOriginData[key]);
       target.editable = false;
       delete this.cacheOriginData[key];
     }
-    this.setState({ data: [...this.state.data] });
+    this.setState({ data: newData });
   }
   render() {
     const columns = [{
@@ -173,6 +182,9 @@ export default class TableForm extends PureComponent {
       title: '操作',
       key: 'action',
       render: (text, record) => {
+        if (!!record.editable && this.state.loading) {
+          return null;
+        }
         if (record.editable) {
           if (record.isNew) {
             return (
@@ -208,6 +220,7 @@ export default class TableForm extends PureComponent {
     return (
       <div>
         <Table
+          loading={this.state.loading}
           columns={columns}
           dataSource={this.state.data}
           pagination={false}

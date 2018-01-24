@@ -10,13 +10,43 @@ const FormItem = Form.Item;
 const { Option } = Select;
 const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 
-@connect(state => ({
-  rule: state.rule,
+const CreateForm = Form.create()((props) => {
+  const { modalVisible, form, handleAdd, handleModalVisible } = props;
+  const okHandle = () => {
+    form.validateFields((err, fieldsValue) => {
+      if (err) return;
+      handleAdd(fieldsValue);
+    });
+  };
+  return (
+    <Modal
+      title="新建规则"
+      visible={modalVisible}
+      onOk={okHandle}
+      onCancel={() => handleModalVisible()}
+    >
+      <FormItem
+        labelCol={{ span: 5 }}
+        wrapperCol={{ span: 15 }}
+        label="描述"
+      >
+        {form.getFieldDecorator('desc', {
+          rules: [{ required: true, message: 'Please input some description...' }],
+        })(
+          <Input placeholder="请输入" />
+        )}
+      </FormItem>
+    </Modal>
+  );
+});
+
+@connect(({ rule, loading }) => ({
+  rule,
+  loading: loading.models.rule,
 }))
 @Form.create()
 export default class TableList extends PureComponent {
   state = {
-    addInputValue: '',
     modalVisible: false,
     expandForm: false,
     selectedRows: [],
@@ -135,17 +165,11 @@ export default class TableList extends PureComponent {
     });
   }
 
-  handleAddInput = (e) => {
-    this.setState({
-      addInputValue: e.target.value,
-    });
-  }
-
-  handleAdd = () => {
+  handleAdd = (fields) => {
     this.props.dispatch({
       type: 'rule/add',
       payload: {
-        description: this.state.addInputValue,
+        description: fields.desc,
       },
     });
 
@@ -268,8 +292,8 @@ export default class TableList extends PureComponent {
   }
 
   render() {
-    const { rule: { loading: ruleLoading, data } } = this.props;
-    const { selectedRows, modalVisible, addInputValue } = this.state;
+    const { rule: { data }, loading } = this.props;
+    const { selectedRows, modalVisible } = this.state;
 
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
@@ -277,6 +301,11 @@ export default class TableList extends PureComponent {
         <Menu.Item key="approval">批量审批</Menu.Item>
       </Menu>
     );
+
+    const parentMethods = {
+      handleAdd: this.handleAdd,
+      handleModalVisible: this.handleModalVisible,
+    };
 
     return (
       <PageHeaderLayout title="查询表格">
@@ -304,27 +333,17 @@ export default class TableList extends PureComponent {
             </div>
             <StandardTable
               selectedRows={selectedRows}
-              loading={ruleLoading}
+              loading={loading}
               data={data}
               onSelectRow={this.handleSelectRows}
               onChange={this.handleStandardTableChange}
             />
           </div>
         </Card>
-        <Modal
-          title="新建规则"
-          visible={modalVisible}
-          onOk={this.handleAdd}
-          onCancel={() => this.handleModalVisible()}
-        >
-          <FormItem
-            labelCol={{ span: 5 }}
-            wrapperCol={{ span: 15 }}
-            label="描述"
-          >
-            <Input placeholder="请输入" onChange={this.handleAddInput} value={addInputValue} />
-          </FormItem>
-        </Modal>
+        <CreateForm
+          {...parentMethods}
+          modalVisible={modalVisible}
+        />
       </PageHeaderLayout>
     );
   }

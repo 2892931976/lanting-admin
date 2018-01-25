@@ -7,7 +7,7 @@
 
 ## 写在前面
 
-Ant Admin 基于 [Ant Design Pro](https://github.com/ant-design/ant-design-pro/) 项目构建，并持续向下延伸，旨在探索 React 前端开发最佳实践。
+Lanting Admin 基于 [Ant Design Pro](https://github.com/ant-design/ant-design-pro/) 项目构建，并持续向下延伸，旨在探索 React 前端开发最佳实践。
 
 Ant Design Pro 是一个企业级中后台前端/设计解决方案，我们秉承 Ant Design 的设计价值观，致力于在设计规范和基础组件的基础上，继续向上构建，提炼出典型模板/业务组件/配套设计资源，进一步提升企业级中后台产品设计研发过程中的『用户』和『设计者』的体验。
 

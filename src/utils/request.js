@@ -1,5 +1,7 @@
+import fetch from 'dva/fetch';
 import { notification } from 'antd';
-import query from '../.roadhogrc.mock.js';
+import { routerRedux } from 'dva/router';
+import store from '../index';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据',
@@ -18,45 +20,69 @@ const codeMessage = {
   503: '服务不可用，服务器暂时过载或维护',
   504: '网关超时',
 };
-
-export default function request(url, params = {}) {
-  return new Promise((resolve) => {
-    const keys = Object.keys(query);
-    let u = url;
-    if (params && params.method) {
-      u = `${params.method} ${u}`;
-    } else {
-      u = `GET ${u}`;
-    }
-    const currentKey = keys.filter(key => new RegExp(key).test(u))[0];
-    const res = query[currentKey];
-
-    if (typeof res === 'function') {
-      const tempReq = {
-        url,
-        params: params.body,
-        query: params.body,
-        body: params.body,
-      };
-      const tempRes = {
-        json: (data) => {
-          resolve(data);
-        },
-        send: (data) => {
-          resolve(data);
-        },
-        status: (code) => {
-          const errortext = codeMessage[code];
-          notification.error({
-            message: `请求错误 ${code}: ${url}`,
-            description: errortext,
-          });
-          return tempRes;
-        },
-      };
-      res(tempReq, tempRes);
-    } else {
-      resolve(res);
-    }
+function checkStatus(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  }
+  const errortext = codeMessage[response.status] || response.statusText;
+  notification.error({
+    message: `请求错误 ${response.status}: ${response.url}`,
+    description: errortext,
   });
+  const error = new Error(errortext);
+  error.name = response.status;
+  error.response = response;
+  throw error;
+}
+
+/**
+ * Requests a URL, returning a promise.
+ *
+ * @param  {string} url       The URL we want to request
+ * @param  {object} [options] The options we want to pass to "fetch"
+ * @return {object}           An object containing either "data" or "err"
+ */
+export default function request(url, options) {
+  const defaultOptions = {
+    credentials: 'include',
+  };
+  const newOptions = { ...defaultOptions, ...options };
+  if (newOptions.method === 'POST' || newOptions.method === 'PUT') {
+    newOptions.headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
+      ...newOptions.headers,
+    };
+    newOptions.body = JSON.stringify(newOptions.body);
+  }
+
+  return fetch(url, newOptions)
+    .then(checkStatus)
+    .then((response) => {
+      if (newOptions.method === 'DELETE' || response.status === 204) {
+        return response.text();
+      }
+      return response.json();
+    })
+    .catch((e) => {
+      const { dispatch } = store;
+      const status = e.name;
+      if (status === 401) {
+        dispatch({
+          type: 'login/logout',
+        });
+        return;
+      }
+      if (status === 403) {
+        dispatch(routerRedux.push('/exception/403'));
+        return;
+      }
+      if (status <= 504 && status >= 500) {
+        dispatch(routerRedux.push('/exception/500'));
+        return;
+      }
+      if (status >= 404 && status < 422) {
+        dispatch(routerRedux.push('/exception/404'));
+      }
+    });
 }

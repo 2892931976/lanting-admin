@@ -34,3 +34,12 @@ script:
       php -S localhost:8000 &
       DEBUG=* npm test .e2e.js
     fi
+
+deploy:
+  provider: pages
+  local-dir: dist
+  skip-cleanup: true
+  keep-history: true
+  github-token: $GITHUB_TOKEN
+  on:
+    branch: master

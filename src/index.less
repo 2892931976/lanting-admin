@@ -1,3 +1,5 @@
+@import "assets/iconfont.less";
+
 html,
 body,
 :global(#root) {
@@ -28,4 +30,24 @@ body {
   .ant-spin-container {
     overflow: visible !important;
   }
+}
+
+// https://github.com/ant-design/ant-design-pro/issues/207
+:global(.iconfont) {
+  font-size: 13px;
+}
+
+:global(.ant-menu) :global(.iconfont) {
+  min-width: 14px;
+  margin-right: 10px;
+}
+
+:global(.ant-menu-inline-collapsed) :global(.iconfont) + span {
+  max-width: 0;
+  display: inline-block;
+  opacity: 0;
+}
+
+:global(.ant-menu-submenu-popup) :global(.iconfont) {
+  display: none;
 }

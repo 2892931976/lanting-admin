@@ -2,11 +2,11 @@ import { isUrl } from '../utils/utils';
 
 const menuData = [{
   name: '酒店概况',
-  icon: 'dashboard',
+  icon: 'icon-hotel',
   path: 'dashboard',
   children: [{
     name: '酒店简介',
-    icon: 'dashboard',
+    icon: 'icon-general',
     path: 'analysis',
   }, {
     name: '交通指引',

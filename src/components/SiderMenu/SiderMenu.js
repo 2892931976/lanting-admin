@@ -16,7 +16,7 @@ const getIcon = (icon) => {
     return <img src={icon} alt="icon" className={styles.icon} />;
   }
   if (typeof icon === 'string') {
-    return <Icon type={icon} />;
+    return icon.indexOf('icon-') < 0 ? <Icon type={icon} /> : <i className="iconfont icon-hotel" />;
   }
   return icon;
 };

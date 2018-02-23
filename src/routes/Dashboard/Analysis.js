@@ -153,6 +153,7 @@ export default class Analysis extends Component {
           <a className={this.isActive('today')} onClick={() => this.selectDate('today')}>
             今日
           </a>
+          <i className="iconfont icon-hotel" />
           <a className={this.isActive('week')} onClick={() => this.selectDate('week')}>
             本周
           </a>

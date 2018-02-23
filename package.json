@@ -1,7 +1,7 @@
 {
-  "name": "ant-design-pro",
+  "name": "lanting-admin",
   "version": "1.1.0",
-  "description": "An out-of-box UI solution for enterprise applications",
+  "description": "开源的酒店营销管理平台",
   "private": true,
   "scripts": {
     "precommit": "npm run lint-staged",

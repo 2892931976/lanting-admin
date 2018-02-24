@@ -2,24 +2,28 @@ import { isUrl } from '../utils/utils';
 
 const menuData = [{
   name: '酒店概况',
-  icon: 'icon-hotel',
-  path: 'dashboard',
+  icon: 'iconfont icon-hotel',
+  path: 'hotel',
   children: [{
     name: '酒店简介',
-    icon: 'icon-general',
-    path: 'analysis',
+    icon: 'iconfont icon-general',
+    path: 'general',
   }, {
     name: '交通指引',
-    path: 'monitor',
+    icon: 'iconfont icon-address',
+    path: 'address',
   }, {
     name: '招聘信息',
-    path: 'workplace',
+    icon: 'iconfont icon-jobs',
+    path: 'jobs',
   }, {
     name: '友情链接',
-    path: 'workplace',
+    icon: 'iconfont icon-links',
+    path: 'links',
   }, {
     name: '联系我们',
-    path: 'workplace',
+    icon: 'iconfont icon-contact',
+    path: 'contact',
   }],
 }, {
   name: '客房管理',

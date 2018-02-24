@@ -16,7 +16,7 @@ const getIcon = (icon) => {
     return <img src={icon} alt="icon" className={styles.icon} />;
   }
   if (typeof icon === 'string') {
-    return icon.indexOf('icon-') < 0 ? <Icon type={icon} /> : <i className="iconfont icon-hotel" />;
+    return icon.indexOf('iconfont') < 0 ? <Icon type={icon} /> : <i className={icon} />;
   }
   return icon;
 };
@@ -221,7 +221,7 @@ export default class SiderMenu extends PureComponent {
         <div className={styles.logo} key="logo">
           <Link to="/">
             <img src={logo} alt="logo" />
-            <h1>Ant Design Pro</h1>
+            <h1>蘭亭 · 映客</h1>
           </Link>
         </div>
         <Menu

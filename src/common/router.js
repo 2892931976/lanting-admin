@@ -73,6 +73,15 @@ export const getRouterData = (app) => {
     '/': {
       component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
     },
+    '/hotel': {
+      component: dynamicWrapper(app, ['profile'], () => import('../routes/CMS/Hotel/General')),
+      name: '酒店概况',
+    },
+    '/hotel/general': {
+      component: dynamicWrapper(app, ['profile'], () => import('../routes/CMS/Hotel/General')),
+      name: '酒店简介',
+    },
+    // ant design pro
     '/dashboard/analysis': {
       component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Analysis')),
     },

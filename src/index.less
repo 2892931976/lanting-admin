@@ -1,4 +1,5 @@
-@import "assets/iconfont.less";
+@import "//at.alicdn.com/t/font_572289_m2clfd8j2ygy14i.css";
+@import "~antd/lib/style/themes/default.less";
 
 html,
 body,
@@ -7,6 +8,7 @@ body,
 }
 
 :global(.ant-layout) {
+  background: #f0f2f5 !important;
   min-height: 100%;
 }
 
@@ -29,6 +31,11 @@ body {
 :global {
   .ant-spin-container {
     overflow: visible !important;
+  }
+
+  .header-logo {
+    color: @primary-color;
+    font-size: 20px !important;
   }
 }
 

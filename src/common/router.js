@@ -81,6 +81,10 @@ export const getRouterData = (app) => {
       component: dynamicWrapper(app, ['profile'], () => import('../routes/CMS/Hotel/General')),
       name: '酒店简介',
     },
+    '/hotel/address': {
+      component: dynamicWrapper(app, ['profile'], () => import('../routes/CMS/Hotel/Address')),
+      name: '交通指引',
+    },
     // ant design pro
     '/dashboard/analysis': {
       component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Analysis')),

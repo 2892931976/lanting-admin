@@ -9,10 +9,10 @@ import styles from './Address.less';
 
 const { Description } = DescriptionList;
 
-const title = '酒店简介';
+const title = '交通指引';
 
 const logo = (
-  <i className="iconfont header-logo icon-hotel" />
+  <i className="iconfont header-logo icon-address" />
 );
 
 const action = (
@@ -81,7 +81,7 @@ const contentDesc = (
   loading: loading.effects['profile/fetchAdvanced'],
 }))
 
-export default class General extends Component {
+export default class Address extends Component {
   state = {
     tabActiveKey: 'simplified',
   };

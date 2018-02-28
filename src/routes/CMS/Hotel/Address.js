@@ -12,7 +12,7 @@ const { Description } = DescriptionList;
 const title = '交通指引';
 
 const logo = (
-  <i className="iconfont header-logo icon-address" />
+  <i className="iconfont header-icon icon-address" />
 );
 
 const action = (
@@ -69,10 +69,8 @@ const editorProps = {
 const contentDesc = (
   <div className={styles.desc}>
     <h3>说明</h3>
-    <h4>转账到支付宝账户</h4>
-    <p>如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p>
-    <h4>转账到银行卡</h4>
-    <p>如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p>
+    <h4>设置酒店概况信息</h4>
+    <p>管理或修改您的酒店地理位置交通等信息。</p>
   </div>
 );
 
